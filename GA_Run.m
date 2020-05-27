@@ -37,11 +37,16 @@ for i=1:model.NP
   [chromosome(i).alpha,chromosome(i).T,chromosome(i).beta] = InitialChromosome(model,i);
   %根据角度和DH矩阵获得对应坐标
   [chromosome(i).pos] = Angel2Pos(chromosome(i),model);
+    %形成可执行路径后,由于实际的路径可能比起始到目标的直线距离远,调整运行时间T
+   [chromosome(i).T] =Modify_Chromosom_T(chromosome(i),model);
+   %重新计算新的pos
+  [chromosome(i).pos] = Angel2Pos(chromosome(i),model);
   %检查坐标合理
   [flag,chromosome(i).atkalpha,chromosome(i).atkbeta] = IsReasonble(chromosome(i),model);
   
   chromosome(i).IsFeasible = (flag==1);
   end
+
   %计算每个符合协调函数解的适应度值和每个解的具体解决方案
   [chromosome(i).cost,chromosome(i).sol] = FitnessFunction(chromosome(i),model);
   %记录所有解的适应度值，作为轮盘赌的集合

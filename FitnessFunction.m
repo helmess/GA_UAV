@@ -117,8 +117,8 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
    [stateProbabilityProcess, expectedCostProcess]=MarkovEvaluate(Allpos,model);
    sol.MarkovState = stateProbabilityProcess;
    sol.MarkovCost = expectedCostProcess;
-    sol.costs=[w1*sol.Length,w2*sol.Length*sol.violation,w3*high,w4*180*mean(expectedCostProcess)];
-    cost= w1*sol.Length +w3*high+w4*mean(expectedCostProcess)*180;
+    sol.costs=[w1*sol.Length,w2*sol.Length*sol.violation,w3*high,w4*150*mean(expectedCostProcess)];
+    cost= w1*sol.Length +w3*high+w4*mean(expectedCostProcess)*150;
     
 %     for uav=1:model.UAV
 % %     uav_cost(uav) = w1*sol(uav).Length +w2*sol(uav).Length*sol(uav).violation...

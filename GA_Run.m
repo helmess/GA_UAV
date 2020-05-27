@@ -28,7 +28,6 @@ seeds_fitness=zeros(1,model.NP);
 %全局最优
 globel.cost =inf;
 %种群初始化
-tic;
 h= waitbar(0,'initial chromosome');
 for i=1:model.NP
   flag =0;
@@ -124,6 +123,7 @@ for it=1:model.MaxIt
     
     
 end
+model.std_ga=0;
 PlotSolution(globel.sol,model);
 end
 

@@ -111,6 +111,7 @@ model.UAV=UAV;
 %matlabµ÷ÊÔ
 debug =1;
 model.debug =debug;
-
+std_ga=1;
+model.std_ga =std_ga;
 
 end

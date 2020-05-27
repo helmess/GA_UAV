@@ -99,7 +99,7 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
      w1 =0.03;
      w2=0.3;
      w3=0.1;
-     w4=0.6;
+     w4=0.1;
      %markov evaluatea
      %获取所有维度的坐标
      r_xx=[];r_yy=[];r_zz=[];

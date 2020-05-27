@@ -5,7 +5,7 @@ function [ stateProbabilityProcess, expectedCostProcess ] = reRouteEvaluation( p
     %基本参数的数量
     nWayPoint = length(posRouteInterp);
     nSensor = length(posSensor);
-    nWeapon = length(posWeapon);
+    [~,nWeapon] = size(posWeapon);
     %转移矩阵
     transitionIntensity = zeros(5,5);
     %状态瞬时表
@@ -18,7 +18,7 @@ function [ stateProbabilityProcess, expectedCostProcess ] = reRouteEvaluation( p
     for point =1:nWayPoint
         flagInsideSensor =zeros(nSensor,1);
         
-        %检查无人家是否在雷达范围内
+        %检查无人机是否在雷达范围内
         for j =1:nSensor
         dist = norm(posRouteInterp(point,:) - posSensor(:,j)');    
         if dist < rangeSensor(j)
@@ -72,7 +72,7 @@ function [ stateProbabilityProcess, expectedCostProcess ] = reRouteEvaluation( p
                 end
         %无人机在探测雷达范围内
         else
-            seqence = find(flagInsideSensor);
+            sequence = find(flagInsideSensor);
             if sum(flagInsideSensor)>1
                 lambdaUD = sensorTransitionIntensity(1,2,sequence(1));
                 lambdaDT = sensorTransitionIntensity(2,3,sequence(1));
@@ -81,10 +81,10 @@ function [ stateProbabilityProcess, expectedCostProcess ] = reRouteEvaluation( p
                 lambdaTE = sensorTransitionIntensity(3,4,sequence(1));
                 lambdaET = sensorTransitionIntensity(4,3,sequence(1));
                 lambdaEH = sensorTransitionIntensity(4,5,sequence(1));
-                for j=2:numel(seqence)
+                for j=2:numel(sequence)
                     lambdaUD =lambdaUD + sensorTransitionIntensity(1,2,sequence(j));
                     lambdaDT = lambdaDT + sensorTransitionIntensity(2,3,sequence(j));
-                    lambdaDU = 1 / (1 / lambdaDU + 1 / sensorTransitionIntensity(2,1,sequence(j)) - 1 / (lambdaDU + sensorTransitionIntensity(2,1,seqence(j))));
+                    lambdaDU = 1 / (1 / lambdaDU + 1 / sensorTransitionIntensity(2,1,sequence(j)) - 1 / (lambdaDU + sensorTransitionIntensity(2,1,sequence(j))));
                     lambdaTD = 1 / (1 / lambdaTD + 1 / sensorTransitionIntensity(3,2,sequence(j)) - 1 / (lambdaTD + sensorTransitionIntensity(3,2,sequence(j))));
                     lambdaTE = max(lambdaTE, sensorTransitionIntensity(3,4,sequence(j)));
                     lambdaET = min(lambdaET, sensorTransitionIntensity(4,3,sequence(j)));
@@ -99,7 +99,7 @@ function [ stateProbabilityProcess, expectedCostProcess ] = reRouteEvaluation( p
                     0, 0, 0, 0, 0];
                 %单个探测雷达区域
             else
-                transitionIntensity = sensorTransitionIntensity(:,:,seqence(1));
+                transitionIntensity = sensorTransitionIntensity(:,:,sequence(1));
             end
         end
         %计算航路中每个点的代价值

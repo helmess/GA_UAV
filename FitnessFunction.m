@@ -47,7 +47,7 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
     dx =diff(xx);
     dy =diff(yy);
     dz = diff(zz);
-    Length = sum(sqrt(dx.^2+dy.^2+dz.^2));
+    Length = sum(sqrt(dx.^2+dy.^2+dz.^2))*1000;
     nobs = numel(xobs);
      violation=0;
     for i=1:nobs
@@ -96,10 +96,29 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
 %     uav_cost =zeros(1,model.UAV);
     %w4 =20;
     %计算距离代价
-    w1 =0.2;
+     w1 =0.03;
      w2=0.3;
      w3=0.1;
-    cost= w1*sol.Length +w2*sol.Length*sol.violation+w3*high;
+     w4=0.6;
+     %markov evaluatea
+     %获取所有维度的坐标
+     r_xx=[];r_yy=[];r_zz=[];
+    for i=2:numel(XS)-2
+    %每一段向量分成10个点
+    r_x = linspace(XS(i),XS(i+1),3);
+    r_y= linspace(YS(i),YS(i+1),3);
+    r_z =linspace(ZS(i),ZS(i+1),3);
+    r_xx = [r_xx,r_x];
+    r_yy = [r_yy,r_y];
+    r_zz =[r_zz ,r_z];
+    end
+     
+    Allpos = [r_xx',r_yy',r_zz'];
+   [stateProbabilityProcess, expectedCostProcess]=MarkovEvaluate(Allpos,model);
+   sol.MarkovState = stateProbabilityProcess;
+   sol.MarkovCost = expectedCostProcess;
+    sol.costs=[w1*sol.Length,w2*sol.Length*sol.violation,w3*high,w4*180*mean(expectedCostProcess)];
+    cost= w1*sol.Length +w3*high+w4*mean(expectedCostProcess)*180;
     
 %     for uav=1:model.UAV
 % %     uav_cost(uav) = w1*sol(uav).Length +w2*sol(uav).Length*sol(uav).violation...

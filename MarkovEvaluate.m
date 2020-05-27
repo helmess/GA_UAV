@@ -8,11 +8,11 @@ function [ stateProbabilityProcess, expectedCostProcess ] = MarkovEvaluate(route
     %Ì½²âÀ×´ï×ø±ê
     posSensor=[model.xobs;model.yobs;model.zobs];
     %¹¥»÷À×´ï×ø±ê
-    posWeapon =[model.xobs;model.yobs;model.zobs];
+    posWeapon =[model.weapon_x;model.weapon_y;model.weapon_z];
     %Ì½²âÀ×´ï·¶Î§
     rangeSensor=model.robs;
     %¹¥»÷À×´ï·¶Î§
-    rangeWeapon=model.robs;
+    rangeWeapon=model.weapon_r;
     timeStep=1;
     
     outsideTransitionIntensity=[

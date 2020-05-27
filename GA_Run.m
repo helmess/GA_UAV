@@ -3,7 +3,6 @@ function [ globel ] = GA_Run( startp,endp,model )
 %   Detailed explanation goes here
     %定义染色体
 %123
-
 model.startp=startp;
 model.endp=endp;
 
@@ -113,7 +112,7 @@ for it=1:model.MaxIt
             globel = chromosome(index);
         end
     end
-   
+    
     best(it) = globel.cost;
     disp(['it: ',num2str(it),'   best value:',num2str(globel.cost)]);
     

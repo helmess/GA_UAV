@@ -57,14 +57,16 @@ close(h)
 
 %开始迭代进化
 for it=1:model.MaxIt
+    %得到最大和平均适应度值
+    model.f_max =max(seeds_fitness);
+    model.f_avg =mean(seeds_fitness);
     %由于适应度值越小越好
     seeds_fitness = 1./seeds_fitness;
     total_fitness = sum(seeds_fitness);
     seeds_probability = seeds_fitness/ total_fitness;
     %计算累计概率
-    seeds_accumulate_probability = cumsum(seeds_probability, 2);
+    seeds_accumulate_probability = cumsum(seeds_probability, 2);    
     %根据轮盘赌选择父母,总共选择出NP个子代
-    
     for seed=1:2:model.NP
     flag =0;
     %保证父母和子代都符合要求
@@ -73,6 +75,7 @@ for it=1:model.MaxIt
     %在父母染色体进行基因重组和变异操作，
     %并获得保证每个子代都符合约束条件
     end
+    
     [ sons] = CrossoverAndMutation( parents,model );
     
     %符合要求以后计算子代的适应度值

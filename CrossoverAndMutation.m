@@ -7,7 +7,6 @@ function [ sons ] = CrossoverAndMutation( parents,model )
      gene_alpha = zeros(model.dim,2);
      gene_beta = zeros(model.dim,2);
      gene_t = zeros(model.dim,2);
-     
      flag =zeros(2,1);   
      %若不发生重组,令孩子的基因等于父母的基因
      sons(1) = parents(1);
@@ -19,6 +18,13 @@ function [ sons ] = CrossoverAndMutation( parents,model )
      gene_alpha(:,j) = parents(j).alpha;
      gene_beta(:,j) = parents(j).beta;
      gene_t(:,j) =parents(j).T;
+     end
+     %随机选取父母任一适应度值
+     f = parents(randi(2,1,1)).cost;
+     %个体适应度大则大概率交叉，适应度小则小概率交叉
+     if f < model.f_avg
+        model.cross_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.cross_prob;
+        model.mutation_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.mutation_prob;
      end
      %浮点数交叉
       if model.cross_prob > rand

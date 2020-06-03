@@ -14,9 +14,9 @@ state_prob=[];
 for i=1: (numel(m_x)-1)
    startp=[m_x(miss_seq(i)),m_y(miss_seq(i)),m_z(miss_seq(i))];
    endp =[m_x(miss_seq(i+1)),m_y(miss_seq(i+1)),m_z(miss_seq(i+1))];
-   Std_GA(startp,endp,model);
-    Global_Chromosome(i)=GA_Run(startp,endp,model);
-    state_prob=[state_prob,Global_Chromosome(i).sol.MarkovState];
+
+    GA_Run(startp,endp,model);
+    %state_prob=[state_prob,Global_Chromosome(i).sol.MarkovState];
 end
 % state_bar =figure(2);
 % b=bar(state_prob','stack');

@@ -22,7 +22,7 @@ function [ sons ] = CrossoverAndMutation( parents,model )
      %随机选取父母任一适应度值
      f = parents(randi(2,1,1)).cost;
      %个体适应度大则大概率交叉，适应度小则小概率交叉
-     if f < model.f_avg
+     if f < model.f_avg && model.std_ga==0
         model.cross_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.cross_prob;
         model.mutation_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.mutation_prob;
      end

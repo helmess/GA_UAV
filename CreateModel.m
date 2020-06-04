@@ -100,7 +100,7 @@ security_dist =5;
 model.security_dist =security_dist;
 model.intervel=intervel;
 %计算起点到目标的距离除以最大速度
-Tmax = norm([sx(1)-ex,sy(1)-ey,ez(1)-ez(1)])/vrange(1);
+Tmax = norm([sx(1)-ex,sy(1)-ey,ez(1)-ez(1)])/vrange(1)/(model.dim+1);
 Tmin =0;
 model.Tmin =Tmin;
 model.Tmax =Tmax;

@@ -63,6 +63,7 @@ function [ sons ] = CrossoverAndMutation( parents,model )
            sons(i) = parents(i);
        end      
     end
-    
+    sons(1).T=reshape(sons(1).T,1,model.dim);
+    sons(2).T =reshape(sons(1).T,1,model.dim);
 end
 

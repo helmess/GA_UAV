@@ -1,4 +1,4 @@
-function [ globel ] = GA_Run( startp,endp,model )
+function [ globel ] = Algrithm_Choose( startp,endp,model )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     %定义染色体
@@ -66,11 +66,22 @@ model.globel =globel;
 % model.std_ga=1;
 % std_globel_ga= Choose_GA(model);
 % PlotSolution(std_globel_ga.sol,model);
-model.std_ga=0;
-imporve__globel_ga=Choose_GA(model);
-PlotSolution(imporve__globel_ga.sol,model);
-model.std_ga=1;
+model.alg_choose=1;
+globel_ga=GA(model);
+PlotSolution(globel_ga.sol,model);
+model.alg_choose=2;
 p_global =GAPSO(model);
 PlotSolution(p_global.sol,model);
+model.alg_choose=3;
+global_particle =PSO(model);
+PlotSolution(global_particle.sol,model);
+figure;
+plot(globel_ga.best_plot);
+hold on;
+plot(p_global.best_plot);
+hold on;
+plot(global_particle.best_plot);
+legend('GA','GAPSO','PSO');
+ 
 end
 

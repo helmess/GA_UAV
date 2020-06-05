@@ -8,17 +8,17 @@ ex =930;
 ey =810;
 ez =285;
 %航偏角范围
-alpha_min= -30;
-alpha_max = 30;
+alpha_min= -45;
+alpha_max = 45;
 %俯仰角范围
-beta_min = -30;
-beta_max = 30;
+beta_min = -20;
+beta_max = 20;
 %GA种群数
 NP=30;
 %GA最大迭代次数
 MaxIt=30;
 %每条染色体的维度
-dim =15;
+dim =30;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -91,8 +91,8 @@ model.alpha_max =alpha_max;
 
 %%定义无人机
 UAV = numel(sx);
-vel =200;
-vrange=[180 200];
+vel =0.2;
+vrange=[0.18 0.22];
 %协同时间分为intervel个时间间隔之和
 intervel=20;
 %无人机安全距离
@@ -113,5 +113,5 @@ debug =1;
 model.debug =debug;
 std_ga=1;
 model.std_ga =std_ga;
-
+model.alg_choose=1;
 end

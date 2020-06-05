@@ -1,11 +1,11 @@
-function [globel]=Choose_GA( model )
+function [globel]=GA( model )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 seeds_fitness =model.seeds_fitness;
 chromosome =model.chromosome;
 next_chromosome=model.next_chromosome;
 AllChromosome=model.AllChromosome;
-globel =model.globel;
+globel.cost =inf;
 %适应度最优值保留
 best=zeros(model.MaxIt+1,1);
 best(1)=model.globel.cost;

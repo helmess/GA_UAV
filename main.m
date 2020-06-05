@@ -12,10 +12,10 @@ tic;
 state_prob=[];
 
 for i=4: (numel(m_x)-1)
-   startp=[m_x(miss_seq(i)),m_y(miss_seq(i)),m_z(miss_seq(i))];
-   endp =[m_x(miss_seq(i+1)),m_y(miss_seq(i+1)),m_z(miss_seq(i+1))];
+   startp=[300 800 280];
+   endp =[700 350 260];
     %GAPSO(startp,endp,model);
-    GA_Run(startp,endp,model);
+    Algrithm_Choose(startp,endp,model);
     %state_prob=[state_prob,Global_Chromosome(i).sol.MarkovState];
 end
 % state_bar =figure(2);

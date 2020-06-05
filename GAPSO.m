@@ -1,9 +1,7 @@
-function GAPSO( startp,endp,model )
+function p_global=GAPSO(model )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-model.startp=startp;
-model.endp=endp;
 
 my_chromosome.pos=[];
 my_chromosome.alpha=[];
@@ -29,33 +27,23 @@ next_chromosome = repmat(my_chromosome,model.NP,1);
 %种群的适应度值
 seeds_fitness=zeros(1,model.NP);
 %全局最优
-p_global.cost =inf;
-
+p_global.cost=inf;
+%适应度最优值保留
+best=zeros(model.MaxIt+1,1);
+best(1)=model.globel.cost;
 %种群初始化
-h= waitbar(0,'initial chromosome');
 for i=1:model.NP
-  flag =0;
-  while flag ~=1
-  %初始化角度和时间
-  [chromosome(i).alpha,chromosome(i).T,chromosome(i).beta] = InitialChromosome(model,i);
-  %根据角度和DH矩阵获得对应坐标
-  [chromosome(i).pos] = Angel2Pos(chromosome(i),model);
-    %形成可执行路径后,由于实际的路径可能比起始到目标的直线距离远,调整运行时间T
-   [chromosome(i).T] =Modify_Chromosom_T(chromosome(i),model);
-   %重新计算新的pos
-  [chromosome(i).pos] = Angel2Pos(chromosome(i),model);
-  %检查坐标合理
-  [flag,chromosome(i).atkalpha,chromosome(i).atkbeta] = IsReasonble(chromosome(i),model);
-  
-  chromosome(i).IsFeasible = (flag==1);
-  end
+    chromosome(i).pos=model.chromosome(i).pos;
+    chromosome(i).alpha=model.chromosome(i).alpha;
+    chromosome(i).beta=model.chromosome(i).alpha;
+    chromosome(i).atkalpha=model.chromosome(i).atkalpha;
+    chromosome(i).atkbeta=model.chromosome(i).atkbeta;
+    chromosome(i).T=model.chromosome(i).T;
+    chromosome(i).sol=model.chromosome(i).sol;
+    chromosome(i).cost=model.chromosome(i).cost;
+    chromosome(i).IsFeasible=model.chromosome(i).IsFeasible;
 
-  %计算每个符合协调函数解的适应度值和每个解的具体解决方案
-  [chromosome(i).cost,chromosome(i).sol] = FitnessFunction(chromosome(i),model);
-  %记录所有解的适应度值，作为轮盘赌的集合
-  seeds_fitness(i) = chromosome(i).cost;
-  h=waitbar(i/model.NP,h,[num2str(i),':chromosomes finished']);
-  %初始化d维速度为0
+    seeds_fitness(i)=model.seeds_fitness(i);
   for d=1:3
   chromosome(i).vel(d,:)= zeros(1,model.dim);
   end
@@ -72,7 +60,6 @@ for i=1:model.NP
   end
   
 end
-close(h);
 
 for it=1:model.MaxIt
     %得到最大和平均适应度值
@@ -132,12 +119,13 @@ for it=1:model.MaxIt
        end
        seeds_fitness(i) =chromosome(i).cost;
     end
-    best(it) = p_global.cost;
-    disp(['it: ',num2str(it),'   best value:',num2str(p_global.cost)]);
+    best(it+1) = p_global.cost;
+    p_global.best_plot =best;
+    disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
     
 end
 
-PlotSolution(p_global.sol,model);
+%PlotSolution(p_global.sol,model);
 
 end
 

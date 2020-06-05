@@ -6,6 +6,10 @@ chromosome =model.chromosome;
 next_chromosome=model.next_chromosome;
 AllChromosome=model.AllChromosome;
 globel =model.globel;
+%适应度最优值保留
+best=zeros(model.MaxIt+1,1);
+best(1)=model.globel.cost;
+
    for it=1:model.MaxIt
     %得到最大和平均适应度值
     model.f_max =max(seeds_fitness);
@@ -73,8 +77,9 @@ globel =model.globel;
         end
     end
     
-    best(it) = globel.cost;
-    disp(['it: ',num2str(it),'   best value:',num2str(globel.cost)]);
+    best(it+1) = globel.cost;
+    globel.best_plot =best;
+    disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
     
     end
 

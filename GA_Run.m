@@ -51,7 +51,9 @@ for i=1:model.NP
   %记录所有解的适应度值，作为轮盘赌的集合
   seeds_fitness(i) = chromosome(i).cost;
   h=waitbar(i/model.NP,h,[num2str(i),':chromosomes finished']);
-  
+  if globel.cost >chromosome(i).cost
+     globel.cost =chromosome(i).cost;
+  end
 end
 close(h)
 %保存初始化参数
@@ -60,12 +62,15 @@ model.chromosome=chromosome ;
 model.next_chromosome=next_chromosome;
 model.AllChromosome=AllChromosome;
 model.globel =globel;
-%%设置ga选择改进和不改进的测试
-model.std_ga=1;
-std_globel_ga= Choose_GA(model);
-PlotSolution(std_globel_ga.sol,model);
+% %%设置ga选择改进和不改进的测试
+% model.std_ga=1;
+% std_globel_ga= Choose_GA(model);
+% PlotSolution(std_globel_ga.sol,model);
 model.std_ga=0;
 imporve__globel_ga=Choose_GA(model);
 PlotSolution(imporve__globel_ga.sol,model);
+model.std_ga=1;
+p_global =GAPSO(model);
+PlotSolution(p_global.sol,model);
 end
 

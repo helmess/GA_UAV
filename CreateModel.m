@@ -1,15 +1,15 @@
 function model = CreateModel()
 %起始点坐标
-sx =[300];
-sy =[450];
-sz =[285];
+sx =[200];
+sy =[2000];
+sz =[600];
 %终点坐标
-ex =930;
-ey =810;
-ez =285;
+ex =3000;
+ey =2500;
+ez =650;
 %航偏角范围
-alpha_min= -45;
-alpha_max = 45;
+alpha_min= -30;
+alpha_max = 30;
 %俯仰角范围
 beta_min = -20;
 beta_max = 20;
@@ -18,7 +18,7 @@ NP=30;
 %GA最大迭代次数
 MaxIt=30;
 %每条染色体的维度
-dim =30;
+dim =15;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -26,15 +26,15 @@ cross_prob =0.9;
 %变异概率
 mutation_prob=0.1;
 %雷达位置
-xobs =[500,675,830];
-yobs =[475,750,515];
-zobs = [238, 275, 240];
-robs =[150,163,150];
+xobs =[3000,2000,4000];
+yobs =[1400,2200,3600];
+zobs = [300, 300, 300];
+robs =[500,500,550];
 %武器位置
-weapon_x=[700,530];
-weapon_y=[680,520];
-weapon_z=[275,263];
-weapon_r=[93,93];
+weapon_x=[2500,3000];
+weapon_y=[4000,3600];
+weapon_z=[300,300];
+weapon_r=[450,500];
 
 model.weapon_x=weapon_x;
 model.weapon_y=weapon_y;
@@ -53,7 +53,7 @@ model.mission_z=mission_z;
 model.mission_r=mission_r;
 %地图大小
 %x,y,z方向范围
-Xmin=300;Xmax=1000;Ymin=300;Ymax=900;Zmin=0;Zmax=500;
+Xmin=0;Xmax=6000;Ymin=0;Ymax=6000;Zmin=300;Zmax=1200;
 model.Xmin =Xmin;
 model.Xmax =Xmax;
 model.Ymin =Ymin;
@@ -91,8 +91,8 @@ model.alpha_max =alpha_max;
 
 %%定义无人机
 UAV = numel(sx);
-vel =0.2;
-vrange=[0.18 0.22];
+vel =100;
+vrange=[50 150];
 %协同时间分为intervel个时间间隔之和
 intervel=20;
 %无人机安全距离

@@ -60,8 +60,8 @@ sum_beta =0;
     %用last2end的俯仰角 - 总的俯仰角 = 从最后一个点到终点的俯仰角变化 
     ag2 =abs( ag1 - sum_beta);
     %计算最后的攻击角
-    AttackAlpha = rad2deg(acos(last2end(1)/norm(last2end(1:2))));
-    AttackBeta = ag1;
+    AttackAlpha = theta;
+    AttackBeta = ag2;
     %根据指定攻击角计算每个航偏角平均增加的角度值
 %     average_value(uav) = (model.attack_alpha(uav) -  AttackAlpha(uav))/(model.dim+1);
    

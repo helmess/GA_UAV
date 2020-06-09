@@ -35,7 +35,7 @@ best(1)=model.globel.cost;
 for i=1:model.NP
     chromosome(i).pos=model.chromosome(i).pos;
     chromosome(i).alpha=model.chromosome(i).alpha;
-    chromosome(i).beta=model.chromosome(i).alpha;
+    chromosome(i).beta=model.chromosome(i).beta;
     chromosome(i).atkalpha=model.chromosome(i).atkalpha;
     chromosome(i).atkbeta=model.chromosome(i).atkbeta;
     chromosome(i).T=model.chromosome(i).T;
@@ -75,10 +75,18 @@ for it=1:model.MaxIt
     model.p_global =p_global;
     %只保留前一半的染色体,后一般抛弃
     for i=1:model.NP/2
+           
            next_chromosome(i) =chromosome(sort_array(i,1));
+           temp_chromosome = next_chromosome(i);
            %更新染色体的速度和位置
            [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
+           %检验坐标是否合理
+           [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
+           if flag ==0
+               next_chromosome(i)=temp_chromosome;
+               continue;
+           end
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
     end

@@ -1,9 +1,9 @@
 function [ vel,alpha,beta,T ] = Update_vel_pos( next_chromosome,model )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-    w=1;
-    c1=1.5;
-    c2=1.5;
+    w=0.98;
+    c1=0.1;
+    c2=0.1;
     vel=zeros(3,model.dim);
     alpha=zeros(model.dim,1);
     beta=zeros(model.dim,1);
@@ -21,11 +21,11 @@ function [ vel,alpha,beta,T ] = Update_vel_pos( next_chromosome,model )
         c1*rand(1,model.dim).*(next_chromosome.best.T - next_chromosome.T)+...
         c2*rand(1,model.dim).*(model.p_global.T - next_chromosome.T);
     %速度约束
-    vel_alpha_max =0.1*(model.alpha_max-model.alpha_min);
+    vel_alpha_max =0.05*(model.alpha_max-model.alpha_min);
     vel_alpha_min =-vel_alpha_max;
-    vel_beta_max =0.1*(model.beta_max-model.beta_min);
+    vel_beta_max =0.05*(model.beta_max-model.beta_min);
     vel_beta_min =-vel_beta_max;
-    vel_T_max =0.1*(model.Tmax-model.Tmin);
+    vel_T_max =0.05*(model.Tmax-model.Tmin);
     vel_T_min =-vel_T_max;
     %约束
     vel(1,:) =max(vel(1,:),vel_alpha_min);
@@ -41,6 +41,12 @@ function [ vel,alpha,beta,T ] = Update_vel_pos( next_chromosome,model )
     beta = next_chromosome.beta + vel(2,:)';
     T = next_chromosome.T + vel(3,:);
     
+    alpha =max(alpha,model.alpha_min);
+    alpha =min(alpha,model.alpha_max);
+    beta =max(beta,model.beta_min);
+    beta =min(beta,model.beta_max);
+    T =max(T,model.Tmin);
+    T =min(T,model.Tmax);
     
 end
 

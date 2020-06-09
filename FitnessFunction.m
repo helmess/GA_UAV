@@ -78,9 +78,9 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
         y=YS(k);
         h=terrain(x,y);        
         if ZS(k)<=(h+10)  %限制飞行最低高度
-            high=high+10000;          
+            high=high+10;          
         elseif ZS(k)>375   %限制飞行最高高度              
-            high=high+10000;           
+            high=high+10;           
         else  
             high=high+abs(ZS(k)-287); %计算与理想高度差距和      
         end        
@@ -118,7 +118,7 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
    sol.MarkovState = stateProbabilityProcess;
    sol.MarkovCost = expectedCostProcess;
     sol.costs=[w1*sol.Length,w3*high,w4*150*mean(expectedCostProcess)];
-    cost= w1*sol.Length+w4*150*mean(expectedCostProcess);
+    cost= w1*sol.Length+w3*high+w4*150*mean(expectedCostProcess);
     
 %     for uav=1:model.UAV
 % %     uav_cost(uav) = w1*sol(uav).Length +w2*sol(uav).Length*sol(uav).violation...

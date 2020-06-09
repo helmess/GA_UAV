@@ -1,16 +1,16 @@
-function Std_GA( startp,endp,model )
+function globel=Std_GA( startp,endp,model )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     model.startp=startp;
     model.endp=endp;
-    model.NP=40;
-    model.MaxIt=50;
+    model.NP=30;
+    model.MaxIt=30;
     %在起始和目的点30等分，获得顺序的x坐标
     model.dim=10;
     x= linspace(startp(1),endp(1),model.dim+2);
     slice =50;
     y =linspace(startp(2),endp(2),slice);
-    z=linspace(200,350,slice);
+    z=linspace(model.Zmin,model.Zmax,slice);
     my_chromosome.pos=[];
     my_chromosome.cost=[];
     my_chromosome.sol=[];

@@ -11,12 +11,12 @@ ez =650;
 alpha_min= -30;
 alpha_max = 30;
 %俯仰角范围
-beta_min = -20;
-beta_max = 20;
+beta_min = -10;
+beta_max = 10;
 %GA种群数
 NP=30;
 %GA最大迭代次数
-MaxIt=30;
+MaxIt=60;
 %每条染色体的维度
 dim =15;
 %num个个体初始化方式

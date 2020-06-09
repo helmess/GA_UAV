@@ -2,8 +2,8 @@ function [ vel,alpha,beta,T ] = Update_vel_pos( next_chromosome,model )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
     w=0.98;
-    c1=0.1;
-    c2=0.1;
+    c1=1.5;
+    c2=1.5;
     vel=zeros(3,model.dim);
     alpha=zeros(model.dim,1);
     beta=zeros(model.dim,1);

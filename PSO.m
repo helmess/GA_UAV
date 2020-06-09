@@ -53,8 +53,8 @@ for i=1:model.NP
   chromosome(i).best.sol =chromosome(i).sol;
   chromosome(i).best.cost =chromosome(i).cost;
   %更新全局最优例子
-  if p_global.cost > chromosome(i).best.cost
-    p_global = chromosome(i).best;
+  if p_global.cost > chromosome(i).cost
+    p_global = chromosome(i);
   end
   
 end

@@ -79,7 +79,7 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
         h=terrain(x,y);        
         if ZS(k)<=(h+10)  %限制飞行最低高度
             high=high+1000;          
-        elseif ZS(k)>(h+620)   %限制飞行最高高度              
+        elseif ZS(k)>(h+600)   %限制飞行最高高度              
             high=high+1000;           
         else  
             high=high+abs(ZS(k)-600); %计算与理想高度差距和      
@@ -99,9 +99,9 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
      r_xx=[];r_yy=[];r_zz=[];
     for i=1:numel(XS)-1
     %每一段向量分成10个点
-    r_x = linspace(XS(i),XS(i+1),8);
-    r_y= linspace(YS(i),YS(i+1),8);
-    r_z =linspace(ZS(i),ZS(i+1),8);
+    r_x = linspace(XS(i),XS(i+1),5);
+    r_y= linspace(YS(i),YS(i+1),5);
+    r_z =linspace(ZS(i),ZS(i+1),5);
     r_xx = [r_xx,r_x];
     r_yy = [r_yy,r_y];
     r_zz =[r_zz ,r_z];

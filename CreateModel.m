@@ -16,9 +16,9 @@ beta_max = 10;
 %GA种群数
 NP=30;
 %GA最大迭代次数
-MaxIt=60;
+MaxIt=30;
 %每条染色体的维度
-dim =10;
+dim =20;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -115,7 +115,8 @@ model.w=w;
 model.c1=c1;
 model.c2=c2;
 
-
+improve_gapso=1;
+model.improve_gapso=improve_gapso;
 %matlab调试
 debug =1;
 model.debug =debug;

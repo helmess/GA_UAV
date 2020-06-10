@@ -4,18 +4,11 @@ close all;
 tic;
 model =CreateModel();
 plotmap(model);
-startp =[model.sx,model.sy,model.sz];
-endp=[model.ex,model.ey,model.ez];
-
-Algrithm_Choose(startp,endp,model);
+Algrithm_Choose(model);
 toc;
 
-miss_seq =[1 3 4 2 5];
-m_x=[model.sx,model.mission_x,model.ex];
-m_y=[model.sy,model.mission_y,model.ey];
-m_z=[model.sz,model.mission_z,model.ez];
 
-state_prob=[];
+
 
 
 % for i=4: (numel(m_x)-1)

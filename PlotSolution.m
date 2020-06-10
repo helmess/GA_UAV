@@ -19,9 +19,11 @@ function  PlotSolution(sol,model )
     if(model.alg_choose==1)
     plot3(xx,yy,zz,'k','LineWidth',2);
     elseif(model.alg_choose==2) 
-    plot3(xx,yy,zz,'b','LineWidth',2);
+    plot3(xx,yy,zz,'y','LineWidth',2);
+    elseif(model.alg_choose==3)
+    plot3(xx,yy,zz,'g','LineWidth',2); 
     else
-    plot3(xx,yy,zz,'g','LineWidth',2);   
+    plot3(xx,yy,zz,'m','LineWidth',2);    
     end
     %plot3(XS(2:model.dim+1),YS(2:model.dim+1),ZS(2:model.dim+1),'ro');
     hold off;

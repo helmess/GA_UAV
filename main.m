@@ -1,19 +1,20 @@
 clc;
 clear;
 close all;
-
+tic;
 model =CreateModel();
 plotmap(model);
 startp =[model.sx,model.sy,model.sz];
 endp=[model.ex,model.ey,model.ez];
-Algrithm_Choose(startp,endp,model);
 
+Algrithm_Choose(startp,endp,model);
+toc;
 
 miss_seq =[1 3 4 2 5];
 m_x=[model.sx,model.mission_x,model.ex];
 m_y=[model.sy,model.mission_y,model.ey];
 m_z=[model.sz,model.mission_z,model.ez];
-tic;
+
 state_prob=[];
 
 

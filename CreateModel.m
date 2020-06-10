@@ -18,7 +18,7 @@ NP=30;
 %GA最大迭代次数
 MaxIt=60;
 %每条染色体的维度
-dim =15;
+dim =10;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -107,6 +107,14 @@ model.Tmax =Tmax;
 model.vrange =vrange;
 model.vel = vel;
 model.UAV=UAV;
+%pso
+c1=1.5;
+c2=1.5;
+w=1;
+model.w=w;
+model.c1=c1;
+model.c2=c2;
+
 
 %matlab调试
 debug =1;

@@ -2,7 +2,7 @@ function p_global=GAPSO(model )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-
+improve=model.improve_gapso;
 my_chromosome.pos=[];
 my_chromosome.alpha=[];
 my_chromosome.beta=[];
@@ -60,8 +60,24 @@ for i=1:model.NP
   end
   
 end
-
+w=1;
+wdamp=0.95;
+c1=1.5;
+c2=1.5;
+c_max=3;
+c_min=1;
+w_ini=0.9;
+w_end=0.4;
+model.w=w;
+model.c1=c1;
+model.c2=c2;
 for it=1:model.MaxIt
+    %
+    if improve==1
+    model.w =w_end + (w_ini-w_end)*it/model.MaxIt;
+    model.c1 = c_min + it*(c_max - c_min)/model.MaxIt;
+    model.c2 = c_max - it*(c_max - c_min)/model.MaxIt;
+    end
     %得到最大和平均适应度值
     model.f_max =max(seeds_fitness);
     model.f_avg =mean(seeds_fitness);

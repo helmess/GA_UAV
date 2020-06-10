@@ -16,7 +16,7 @@ beta_max = 10;
 %GA种群数
 NP=30;
 %GA最大迭代次数
-MaxIt=60;
+MaxIt=30;
 %每条染色体的维度
 dim =10;
 %num个个体初始化方式

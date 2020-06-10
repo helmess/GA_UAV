@@ -74,7 +74,7 @@ model.c2=c2;
 for it=1:model.MaxIt
     %
     if improve==1
-    model.w =w_end + (w_ini-w_end)*it/model.MaxIt;
+    model.w =w_ini - (w_ini-w_end)*it/model.MaxIt;
     model.c1 = c_min + it*(c_max - c_min)/model.MaxIt;
     model.c2 = c_max - it*(c_max - c_min)/model.MaxIt;
     end

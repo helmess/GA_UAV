@@ -76,7 +76,7 @@ best(1)=model.globel.cost;
             globel = chromosome(index);
         end
     end
-    
+
     best(it+1) = globel.cost;
     globel.best_plot =best;
     disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);

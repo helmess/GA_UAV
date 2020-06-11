@@ -8,17 +8,17 @@ ex =3000;
 ey =2500;
 ez =650;
 %航偏角范围
-alpha_min= -30;
-alpha_max = 30;
+alpha_min= -45;
+alpha_max = 45;
 %俯仰角范围
-beta_min = -10;
-beta_max = 10;
+beta_min = -20;
+beta_max = 20;
 %GA种群数
 NP=30;
 %GA最大迭代次数
 MaxIt=30;
 %每条染色体的维度
-dim =10;
+dim =15;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -32,7 +32,7 @@ zobs = [300, 300, 300,300];
 robs =[600,600,650,700];
 %武器位置
 weapon_x=[1400,2500,3800,2700];
-weapon_y=[2000,1600,2500,3200];
+weapon_y=[2500,1600,2500,3200];
 weapon_z=[300,300,300,300];
 weapon_r=[450,450,450,450];
 
@@ -42,9 +42,9 @@ model.weapon_z=weapon_z;
 model.weapon_r=weapon_r;
 %任务点
 mission_seq=[2 3 1];
-mission_x=[800,410,555];
-mission_y=[580,545,675];
-mission_z=[278,280,280];
+mission_x=[1500,3000,4500];
+mission_y=[1800,1900,2200];
+mission_z=[600,550,550];
 mission_r=[15,15,15];
 model.mission_seq =mission_seq;
 model.mission_x=mission_x;

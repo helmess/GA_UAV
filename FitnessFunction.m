@@ -93,28 +93,27 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
      w1 =0.1;
      w2=0.3;
      w3=0.1;
-     w4=0.1;
+     w4=0.5;
      %markov evaluatea
      %获取所有维度的坐标
      r_xx=[];r_yy=[];r_zz=[];
     for i=1:numel(XS)-1
     %每一段向量分成10个点
-    r_x = linspace(XS(i),XS(i+1),8);
-    r_y= linspace(YS(i),YS(i+1),8);
-    r_z =linspace(ZS(i),ZS(i+1),8);
+    r_x = linspace(XS(i),XS(i+1),4);
+    r_y= linspace(YS(i),YS(i+1),4);
+    r_z =linspace(ZS(i),ZS(i+1),4);
     r_xx = [r_xx,r_x];
     r_yy = [r_yy,r_y];
     r_zz =[r_zz ,r_z];
     end
      
     Allpos = [r_xx',r_yy',r_zz'];
-   [stateProbabilityProcess, expectedCostProcess]=MarkovEvaluate(Allpos,model);
-   sol.MarkovState = stateProbabilityProcess;
-   sol.MarkovCost = expectedCostProcess;
-    sol.costs=[w1*sol.Length,w3*high,w4*150*mean(expectedCostProcess)];
-    cost= w1*sol.Length+w3*high+w4*150*mean(expectedCostProcess);
-    
-
+   %[stateProbabilityProcess, expectedCostProcess]=MarkovEvaluate(Allpos,model);
+   %sol.MarkovState = stateProbabilityProcess;
+   %sol.MarkovCost = expectedCostProcess;
+    %sol.costs=[w1*sol.Length,w3*high,w4*150*mean(expectedCostProcess)];
+    cost= w1*sol.Length+w3*high+w2*Length*violation;
+     
    
 end
 

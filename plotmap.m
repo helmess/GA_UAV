@@ -12,14 +12,15 @@ global Scene;
     %画地形
 width=0:1000:model.Xmax;%x
 depth=0:1000:model.Ymax;%y
-height=abs(peaks(7)*70)+300;
+height=abs(peaks(7)*80)+300;
     wi=0:100:6000;
     di=0:100:6000;
     di=di';
     %差值拟合  嗯嗯
     zcubic=interp2(width,depth,height,wi,di,'cubic');
     %三维地形显示
-    surfc(wi,di,zcubic,'FaceColor','none','EdgeColor','flat');  
+    surfc(wi,di,zcubic);
+    shading flat;
     xlabel('Width')  
     ylabel('Depth')  
     zlabel('Heitht')  

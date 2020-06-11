@@ -14,11 +14,11 @@ alpha_max = 45;
 beta_min = -10;
 beta_max = 10;
 %GA种群数
-NP=30;
+NP=32;
 %GA最大迭代次数
 MaxIt=30;
 %每条染色体的维度
-dim =10;
+dim =15;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率

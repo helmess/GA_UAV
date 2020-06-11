@@ -3,8 +3,8 @@ function [ globel ] = Algrithm_Choose( startp,endp,model )
 %   Detailed explanation goes here
     %定义染色体
 %123
-model.startp=startp;
-model.endp=endp;
+model.startp=endp;
+model.endp=startp;
 
 my_chromosome.pos=[];
 my_chromosome.alpha=[];
@@ -66,21 +66,25 @@ model.globel =globel;
 % model.std_ga=1;
 % std_globel_ga= Std_GA(model.startp,model.endp,model);
 % PlotSolution(std_globel_ga.sol,model);
-% model.std_ga=0;
-% model.alg_choose=1;
-% globel_ga=GA(model);
-% PlotSolution(globel_ga.sol,model);
-% pause(0.01);
+model.std_ga=0;
+model.alg_choose=1;
+globel_ga=Double_GA(model);
+PlotSolution(globel_ga.sol,model);
+pause(0.01);
 model.alg_choose=2;
-model.improve_gapso=0;
-global_gapso =GAPSO(model);
-PlotSolution(global_gapso.sol,model);
+globel_ga2=GA(model);
+PlotSolution(globel_ga2.sol,model);
 pause(0.01);
-model.alg_choose=4;
-model.improve_gapso=1;
-global_improve_gapso =GAPSO(model);
-PlotSolution(global_improve_gapso.sol,model);
-pause(0.01);
+% model.alg_choose=2;
+% model.improve_gapso=0;
+% global_gapso =GAPSO(model);
+% PlotSolution(global_gapso.sol,model);
+% pause(0.01);
+% model.alg_choose=4;
+% model.improve_gapso=1;
+% global_improve_gapso =GAPSO(model);
+% PlotSolution(global_improve_gapso.sol,model);
+% pause(0.01);
 % model.alg_choose=3;
 % global_particle =PSO(model);
 % PlotSolution(global_particle.sol,model);
@@ -88,12 +92,12 @@ pause(0.01);
 figure;
 % plot(globel_ga.best_plot);
 % hold on;
-plot(global_gapso.best_plot);
+plot(globel_ga.best_plot);
 hold on;
 % plot(global_particle.best_plot);
 %hold on;
-plot(global_improve_gapso.best_plot);
+plot(globel_ga2.best_plot);
 % legend('GA','GAPSO','PSO','IGAPSO');
-legend('GAPSO','IGAPSO');
+legend('GA','DGA');
 end
 

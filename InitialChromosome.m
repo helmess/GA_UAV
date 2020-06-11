@@ -1,9 +1,11 @@
 function [ alpha,T,beta ] = InitialChromosome( model,num)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-
+  
     startp =model.startp;
     endp =model.endp;
+    
+    
     %计算起始到目标的向量
    st = endp-startp;
    dist = norm(st);

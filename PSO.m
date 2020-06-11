@@ -62,14 +62,17 @@ end
 model.p_global =p_global;
 for it=1:model.MaxIt
     for i=1:model.NP
-           
+        flag=0;
+         
            next_chromosome(i) =chromosome(i);
            %更新染色体的速度和位置
            [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
            %检验坐标是否合理
-           [flag(i),next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
-         
+           [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
+           if flag==0
+            next_chromosome(i) =chromosome(i);
+           end
          
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);

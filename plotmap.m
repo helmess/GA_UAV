@@ -12,7 +12,7 @@ global Scene;
     %»­µØÐÎ
 width=0:1000:model.Xmax;%x
 depth=0:1000:model.Ymax;%y
-height=abs(peaks(7)*80)+300;
+height=abs(peaks(7)*100)+300;
     wi=0:100:6000;
     di=0:100:6000;
     di=di';
@@ -46,16 +46,16 @@ end
     surf(X,Y,Z,'EdgeColor','none','FaceColor',[0.929,0.694,0.125]);
     hold on;
 
-%»­ÎäÆ÷
-for k=1:numel(model.weapon_x)
-    [x,y,z]=sphere(12);
-    z(z<0)=nan;
-    r=model.weapon_r(k);
-    x0=model.weapon_x(k);    y0=model.weapon_y(k);   z0=model.weapon_z(k);
-    X=x*r+x0;    Y=y*r+y0;    Z=z*r+z0; 
-    surf(X,Y,Z,'EdgeColor','r','FaceColor','none');  
-    hold on;
-end
+% %»­ÎäÆ÷
+% for k=1:numel(model.weapon_x)
+%     [x,y,z]=sphere(12);
+%     z(z<0)=nan;
+%     r=model.weapon_r(k);
+%     x0=model.weapon_x(k);    y0=model.weapon_y(k);   z0=model.weapon_z(k);
+%     X=x*r+x0;    Y=y*r+y0;    Z=z*r+z0; 
+%     surf(X,Y,Z,'EdgeColor','r','FaceColor','none');  
+%     hold on;
+% end
 
 end
 

@@ -1,24 +1,24 @@
 function model = CreateModel()
 %起始点坐标
 sx =[200];
-sy =[2000];
-sz =[600];
+sy =[200];
+sz =[400];
 %终点坐标
-ex =3000;
-ey =2500;
+ex =5500;
+ey =5000;
 ez =650;
 %航偏角范围
 alpha_min= -45;
 alpha_max = 45;
 %俯仰角范围
-beta_min = -20;
-beta_max = 20;
+beta_min = -10;
+beta_max = 10;
 %GA种群数
 NP=30;
 %GA最大迭代次数
 MaxIt=30;
 %每条染色体的维度
-dim =15;
+dim =10;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率
@@ -26,10 +26,10 @@ cross_prob =0.9;
 %变异概率
 mutation_prob=0.1;
 %雷达位置
-xobs =[2700,1500,4000,2500];
-yobs =[1500,2200,2700,3300];
-zobs = [300, 300, 300,300];
-robs =[600,600,650,700];
+xobs =[1500,2550,3500,4500,5000];
+yobs =[3000,900,3000,4500,1800];
+zobs = [300, 300, 300,300,300];
+robs =[800,600,900,700,700];
 %武器位置
 weapon_x=[1400,2500,3800,2700];
 weapon_y=[2500,1600,2500,3200];
@@ -115,7 +115,8 @@ model.w=w;
 model.c1=c1;
 model.c2=c2;
 
-
+improve_gapso=0;
+model.improve_gapso=improve_gapso;
 %matlab调试
 debug =1;
 model.debug =debug;

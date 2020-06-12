@@ -6,7 +6,7 @@ sz =[400];
 %终点坐标
 ex =5500;
 ey =5000;
-ez =650;
+ez =300;
 %航偏角范围
 alpha_min= -45;
 alpha_max = 45;
@@ -14,9 +14,9 @@ alpha_max = 45;
 beta_min = -10;
 beta_max = 10;
 %GA种群数
-NP=32;
+NP=30;
 %GA最大迭代次数
-MaxIt=30;
+MaxIt=70;
 %每条染色体的维度
 dim =15;
 %num个个体初始化方式

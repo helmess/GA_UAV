@@ -54,10 +54,14 @@ best(1)=model.globel.cost;
     %下次迭代的染色体为不重复cost的最优染色体
     for i=2:model.NP*2
         current_cost = eval_array(i,2);
-        if current_cost ~= last_cost
+        if round(current_cost) ~= round(last_cost)
         cnt = cnt+1;
+        if cnt>model.NP
+            break;
+        end
         chromosome(cnt) = AllChromosome(eval_array(i,1));
-        last_cost = current_cost;
+        last_cost = current_cost; 
+        
         end
     end
     %如果下次迭代的染色体数目不够，就根据轮盘赌补染色体。

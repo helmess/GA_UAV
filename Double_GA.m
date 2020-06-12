@@ -4,7 +4,7 @@ function [ ga_global ] = Double_GA( model )
     %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
-model.npop=2;
+model.npop=3;
 npop=model.npop;
 %适应度最优值保留
 best=zeros(model.MaxIt+1,1);
@@ -41,19 +41,41 @@ best(1)=model.globel.cost;
     next_chromosome(seed+1) = (sons(2));
     end
     all_chromosome(1:model.NP/npop) = chromosome;
-    all_chromosome(model.NP/npop+1:model.NP) =next_chromosome;
+    all_chromosome(model.NP/npop+1:model.NP/npop*2) =next_chromosome;
     %以cost从小到大进行排序
     [~,order_index]= sort([all_chromosome.cost]);
-    %选出迭代的染色体和全局最优染色体
+    %下次迭代的染色体为不重复cost的最优染色体
+    cnt=1;
+    next_chromosome(cnt) = all_chromosome(order_index(cnt));
+    last_cost = next_chromosome(cnt).cost;
+    for i=2:model.NP/npop*2
+        cur_cost =all_chromosome(order_index(i)).cost;
+        if round(last_cost) ~=round(cur_cost)
+            cnt=cnt+1;
+            if cnt>model.NP/npop
+            break;
+            end   
+            next_chromosome(cnt) = all_chromosome(order_index(i));
+            last_cost = cur_cost;
+        end
+        
+    end
+    %不重复的染色体不够一个子种群则，直接补最优的染色体
+    cnt_r =cnt;
+    while cnt <model.NP/npop
+        cnt =cnt+1;
+        next_chromosome(cnt)=all_chromosome(order_index(cnt -cnt_r));
+    end
+    
+    
     for index =1:model.NP/npop
-        next_chromosome(index) = all_chromosome(order_index(index));
         seeds_fitness(index) =chromosome(index).cost; 
         if globel(pop).cost >chromosome(index).cost
             globel(pop) = chromosome(index);
         end
     end
     %选出该子群里最优秀的pop_num个染色体进行交换
-    pop_num=5;
+    pop_num=1;
     for i=1:pop_num
          pop_trans(i+(pop-1)*pop_num)=  all_chromosome(order_index(i));
     end
@@ -71,13 +93,14 @@ best(1)=model.globel.cost;
     for pop=1:npop
        if  model.globel.cost>globel(pop).cost
              model.globel.cost = globel(pop).cost;
+             ga_global=globel(pop);
        end
     end
     
-    best(it)=model.globel.cost;
+    best(it+1)=model.globel.cost;
+    ga_global.best_plot =best;
     disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
    end
-    ga_global =globel(1);
-    ga_global.best_plot =best;
+
 end
 

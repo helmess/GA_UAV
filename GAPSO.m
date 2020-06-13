@@ -13,6 +13,7 @@ my_chromosome.cost=[];
 my_chromosome.T=[];
 my_chromosome.IsFeasible=[];
 my_chromosome.vel=[];
+my_chromosome.pso=[];
 my_chromosome.best.pos=[];
 my_chromosome.best.alpha=[];
 my_chromosome.best.beta=[];
@@ -42,7 +43,7 @@ for i=1:model.NP
     chromosome(i).sol=model.chromosome(i).sol;
     chromosome(i).cost=model.chromosome(i).cost;
     chromosome(i).IsFeasible=model.chromosome(i).IsFeasible;
-
+    chromosome(i).pso=1;
     seeds_fitness(i)=model.seeds_fitness(i);
   for d=1:3
   chromosome(i).vel(d,:)= zeros(1,model.dim);
@@ -57,6 +58,7 @@ for i=1:model.NP
   %更新全局最优例子
   if p_global.cost > chromosome(i).best.cost
     p_global = chromosome(i).best;
+    global_index =i;
   end
   
 end
@@ -73,11 +75,11 @@ model.c1=c1;
 model.c2=c2;
 for it=1:model.MaxIt
     %
-    if improve==1
-    model.w =w_ini - (w_ini-w_end)*it/model.MaxIt;
-    model.c1 = c_min + it*(c_max - c_min)/model.MaxIt;
-    model.c2 = c_max - it*(c_max - c_min)/model.MaxIt;
-    end
+%     if improve==1
+%     model.w =w_ini - (w_ini-w_end)*it/model.MaxIt;
+%     model.c1 = c_min + it*(c_max - c_min)/model.MaxIt;
+%     model.c2 = c_max - it*(c_max - c_min)/model.MaxIt;
+%     end
     %得到最大和平均适应度值
     model.f_max =max(seeds_fitness);
     model.f_avg =mean(seeds_fitness);
@@ -102,6 +104,7 @@ for it=1:model.MaxIt
       
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
+           next_chromosome(i).pso=1;
     end
     %对剩余的NP/2个染色体进行选择交叉变异操作
     for i=model.NP/2+1:2:model.NP
@@ -122,9 +125,16 @@ for it=1:model.MaxIt
         [sons(2).cost,sons(2).sol] = FitnessFunction(sons(2),model);
         next_chromosome(i) = sons(1);
         next_chromosome(i+1) =sons(2);
+        next_chromosome(i).pso=0;
+        next_chromosome(i+1).pso=0;
     end
+  
     for i=1:model.NP
-       chromosome(i) =next_chromosome(i);
+      
+        [~,order_index]= sort([next_chromosome.cost]);
+        chromosome(i) =next_chromosome((order_index(i)));
+      
+     
        %更新局部最优
        if chromosome(i).cost < chromosome(i).best.cost
               chromosome(i).best.pos =chromosome(i).pos;
@@ -137,15 +147,34 @@ for it=1:model.MaxIt
        %更新全局最优
        if chromosome(i).cost < p_global.cost
            p_global = chromosome(i);
+           %记录最优值的索引
+           global_index =i;
        end
        seeds_fitness(i) =chromosome(i).cost;
     end
-    best(it+1) = p_global.cost;
-    p_global.best_plot =best;
-    disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
+    if improve==1 && it>20
+    p_global =tabusearch(p_global,model);
+    %更新最优染色体
+    chromosome(global_index).cost =p_global.cost;
+    chromosome(global_index).pos =p_global.pos;
+    chromosome(global_index).alpha =p_global.alpha;
+    chromosome(global_index).beta =p_global.beta;
+    chromosome(global_index).T =p_global.T;
+    chromosome(global_index).sol =p_global.sol;
+           if chromosome(global_index).best.cost < chromosome(global_index).cost
+              chromosome(global_index).best.pos =chromosome(global_index).pos;
+              chromosome(global_index).best.alpha =chromosome(global_index).alpha;
+              chromosome(global_index).best.beta =chromosome(global_index).beta;
+              chromosome(global_index).best.T =chromosome(global_index).T;
+              chromosome(global_index).best.sol =chromosome(global_index).sol;
+           end
+ 
+    end
     
+    best(it+1) = p_global.cost;
+    disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
 end
-
+p_global.best_plot =best;
 %PlotSolution(p_global.sol,model);
 
 end

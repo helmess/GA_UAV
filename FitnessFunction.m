@@ -73,19 +73,23 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
     %计算协调适应值
     % 3、飞行高度限制
      high=0;
-     for k=1:numel(XS)
-        x=XS(k);
-        y=YS(k);
-        h=terrain(x,y);        
-        if ZS(k)<=(h+10)  %限制飞行最低高度
+   for i=1:k-1
+    point =2;
+    %每一段向量分成point个点
+    x_r = linspace(XS(i),XS(i+1),point);
+    y_r= linspace(YS(i),YS(i+1),point);
+    z_r =linspace(ZS(i),ZS(i+1),point); 
+    for p=1:point
+        h=terrain(x_r(p),y_r(p));        
+        if z_r(p)<=(h+10)  %限制飞行最低高度
             high=high+1000;          
-        elseif ZS(k)>(h+620)   %限制飞行最高高度              
+        elseif z_r(p)>(h+620)   %限制飞行最高高度              
             high=high+1000;           
         else  
-            high=high+abs(ZS(k)-600); %计算与理想高度差距和      
+            high=high+abs(z_r(p)-600); %计算与理想高度差距和      
         end        
     end
-    
+   end
     %z
   
     %w4 =20;

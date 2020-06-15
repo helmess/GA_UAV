@@ -62,10 +62,10 @@ for i=1:model.NP
   end
   
 end
-w=1;
+w=0.8;
 wdamp=0.95;
-c1=1.5;
-c2=1.5;
+c1=1;
+c2=1;
 c_max=3;
 c_min=1;
 w_ini=0.9;
@@ -105,6 +105,9 @@ for it=1:model.MaxIt
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
            next_chromosome(i).pso=1;
+           if improve ==2 && mod(i,5)==0
+           next_chromosome(i) = SA(next_chromosome(i),model);
+           end
     end
     %对剩余的NP/2个染色体进行选择交叉变异操作
     for i=model.NP/2+1:2:model.NP
@@ -123,8 +126,13 @@ for it=1:model.MaxIt
         %符合要求以后计算子代的适应度值
         [sons(1).cost,sons(1).sol] = FitnessFunction(sons(1),model);
         [sons(2).cost,sons(2).sol] = FitnessFunction(sons(2),model);
-        next_chromosome(i) = sons(1);
-        next_chromosome(i+1) =sons(2);
+%         if improve==2
+% %         next_chromosome(i) = SA(sons(1),model);
+% %         next_chromosome(i+1) =SA(sons(2),model);
+%         else
+        next_chromosome(i) =sons(1);
+        next_chromosome(i+1)=sons(2);
+%         end
         next_chromosome(i).pso=0;
         next_chromosome(i+1).pso=0;
     end
@@ -170,7 +178,9 @@ for it=1:model.MaxIt
            end
  
     end
-    
+    if it==50
+       a=1; 
+    end
     best(it+1) = p_global.cost;
     disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);
 end

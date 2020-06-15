@@ -7,8 +7,10 @@ plotmap(model);
 startp =[model.sx,model.sy,model.sz];
 endp=[model.ex,model.ey,model.ez];
 % 
- Algrithm_Choose(startp,endp,model);
-
+for i=1:2
+ model.cycle=i;
+ fit_array(i,:)=Algrithm_Choose(startp,endp,model);
+end
 m_x=[model.sx,model.mission_x,model.ex];
 m_y=[model.sy,model.mission_y,model.ey];
 m_z=[model.sz,model.mission_z,model.ez];

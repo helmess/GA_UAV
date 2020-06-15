@@ -12,7 +12,7 @@ global Scene;
     %»­µØÐÎ
 width=0:1000:model.Xmax;%x
 depth=0:1000:model.Ymax;%y
-height=abs(peaks(7)*100)+300;
+height=abs(peaks(7)*120)+300;
     wi=0:100:6000;
     di=0:100:6000;
     di=di';

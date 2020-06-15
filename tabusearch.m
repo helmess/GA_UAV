@@ -15,7 +15,7 @@ function [ improve_global ] = tabusearch( chromosome,model )
     %随机搜索每个维度的领域
     tabulist=[];
     tabulist=[tabulist;x'];
-    for echo=1:4
+    for echo=1:2
        sneiborhood =  getneighborhood(x,model);
        bestcandidate =  x;
        [k,~]=size(sneiborhood);
@@ -57,8 +57,8 @@ end
 
 
 function alpha_neighbor = getneighborhood(x,model)
-    step=1;
-    neighborrange=5;
+    step=2;
+    neighborrange=10;
     di =model.di;
     if di==1
     x_min =model.alpha_min;

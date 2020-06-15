@@ -1,4 +1,4 @@
-function [ globel ] = Algrithm_Choose( startp,endp,model )
+function [ fit_array ] = Algrithm_Choose( startp,endp,model )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     %定义染色体
@@ -66,7 +66,7 @@ model.globel =globel;
 % model.std_ga=1;
 % std_globel_ga= Std_GA(model.startp,model.endp,model);
 % PlotSolution(std_globel_ga.sol,model);
-% model.std_ga=0;
+ model.std_ga=1;
 % model.alg_choose=1;
 % globel_ga=Double_GA(model);
 % PlotSolution(globel_ga.sol,model);
@@ -77,12 +77,12 @@ model.globel =globel;
 % PlotSolution(globel_ga.sol,model);
 % pause(0.01);
 model.alg_choose=3;
-model.improve_gapso=1;
+model.improve_gapso=0;
 global_gapso =GAPSO(model);
 PlotSolution(global_gapso.sol,model);
 pause(0.01);
 model.alg_choose=4;
-model.improve_gapso=0;
+model.improve_gapso=1;
 global_improve_gapso =GAPSO(model);
 PlotSolution(global_improve_gapso.sol,model);
 % pause(0.01);
@@ -91,16 +91,18 @@ PlotSolution(global_improve_gapso.sol,model);
 % PlotSolution(global_particle.sol,model);
 % pause(0.01);
 figure;
-% plot(globel_ga.best_plot);
-% hold on;
-% plot(globel_ga.best_plot);
-% hold on;
-% plot(global_particle.best_plot);
-%hold on;
+% % plot(globel_ga.best_plot);
+% % hold on;
+% % plot(globel_ga.best_plot);
+% % hold on;
+% % plot(global_particle.best_plot);
+% %hold on;
 plot(global_gapso.best_plot);
 hold on;
 plot(global_improve_gapso.best_plot);
-legend('IGAPSO','GAPSO');
-% legend('GAPSO','DGAPSO');
+% legend('IGAPSO','GAPSO');
+legend('GAPSO','DGAPSO');
+fit_array=[global_gapso.cost,global_improve_gapso.cost];
+
 end
 

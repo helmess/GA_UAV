@@ -31,8 +31,8 @@ function [ sons ] = CrossoverAndMutation( parents,model )
          %浮点数交叉用随机数a(0,1);
          %x1(t+1) = a*x1(t)+(1-a)x2(t)
          %x2(t+1) = a*x2(t)+(1-a)x1(t)
-           %各个基因分别交叉
-           cross_prob = 0.8;
+          %各个基因分别交叉
+           cross_prob = 0.95;
            sons(1).alpha =  cross_prob*gene_alpha(:,1)+(1-cross_prob)*gene_alpha(:,2);
            sons(2).alpha =  cross_prob*gene_alpha(:,2)+(1-cross_prob)*gene_alpha(:,1);
            sons(1).beta =  cross_prob*gene_beta(:,1)+(1-cross_prob)*gene_beta(:,2);
@@ -41,7 +41,7 @@ function [ sons ] = CrossoverAndMutation( parents,model )
            sons(2).T     =  cross_prob*gene_t(:,2)+(1-cross_prob)*gene_t(:,1);
            %各个基因约束范围
            [sons(1).alpha,sons(1).beta,sons(1).T] = Constrain(sons(1).alpha,sons(1).beta,sons(1).T,model);
-           [sons(2).alpha,sons(2).beta,sons(2).T] = Constrain(sons(2).alpha,sons(2).beta,sons(2).T,model);
+           [sons(2).alpha,sons(2).beta,sons(2).T] = Constrain(sons(2).alpha,sons(2).beta,sons(2).T,model); 
       end
      %%对新的基因进行变异操作
      for j=1:2

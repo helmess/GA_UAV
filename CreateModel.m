@@ -6,23 +6,23 @@ sz =[400];
 %终点坐标
 ex =5500;
 ey =5000;
-ez =300;
+ez =500;
 %航偏角范围
 alpha_min= -45;
 alpha_max = 45;
 %俯仰角范围
-beta_min = -15;
-beta_max = 15;
+beta_min = -5;
+beta_max = 5;
 %GA种群数
-NP=64;
+NP=40;
 %GA最大迭代次数
-MaxIt=50;
+MaxIt=30;
 %每条染色体的维度
-dim =15;
+dim =10;
 %num个个体初始化方式
-num=NP*0.2;
+num=NP*0.1;
 %交叉概率
-cross_prob =0.5;
+cross_prob =0.6;
 %变异概率
 mutation_prob=0.1;
 %雷达位置
@@ -120,7 +120,7 @@ model.improve_gapso=improve_gapso;
 %matlab调试
 debug =1;
 model.debug =debug;
-std_ga=1;
+std_ga=0;
 model.std_ga =std_ga;
 model.alg_choose=1;
 end

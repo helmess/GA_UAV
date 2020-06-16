@@ -9,6 +9,8 @@ function  PlotSolution(sol,model )
     yy=sol.yy;
     zz=sol.zz;
     global Scene;
+    global p1;global p2;global p3;global p4;
+    
     %alpha =0:pi/50:2*pi;
     %[x1 y1 z1]=sphere;       %将球体数据写入三矩阵中
     %a=[8 -2 2  4];                  %设置球体参数
@@ -17,13 +19,13 @@ function  PlotSolution(sol,model )
     view(0,90);
     hold on;
     if(model.alg_choose==1)
-    plot3(xx,yy,zz,'k','LineWidth',2);
+    p1=plot3(xx,yy,zz,'k','LineWidth',2);
     elseif(model.alg_choose==2) 
-    plot3(xx,yy,zz,'y','LineWidth',2);
+    p2=plot3(xx,yy,zz,'y','LineWidth',2);
     elseif(model.alg_choose==3)
-    plot3(xx,yy,zz,'g','LineWidth',2); 
+    p3=plot3(xx,yy,zz,'g','LineWidth',2); 
     else
-    plot3(xx,yy,zz,'m','LineWidth',2);    
+    p4=plot3(xx,yy,zz,'m','LineWidth',2);    
     end
     %plot3(XS(2:model.dim+1),YS(2:model.dim+1),ZS(2:model.dim+1),'ro');
     hold off;

@@ -72,9 +72,6 @@ best(1)=model.globel.cost;
     end
     %选出迭代的染色体和全局最优染色体
     for index =1:model.NP
-        if model.std_ga==1
-            chromosome(index) =next_chromosome(index);
-        end
         seeds_fitness(index) =chromosome(index).cost; 
         if globel.cost >chromosome(index).cost
             globel = chromosome(index);

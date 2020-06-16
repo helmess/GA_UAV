@@ -100,14 +100,12 @@ for it=1:model.MaxIt
            [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
            %检验坐标是否合理
-           [flag(i),next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
-      
+           [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
+        
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
            next_chromosome(i).pso=1;
-           if improve ==2 && mod(i,5)==0
-           next_chromosome(i) = SA(next_chromosome(i),model);
-           end
+         
     end
     %对剩余的NP/2个染色体进行选择交叉变异操作
     for i=model.NP/2+1:2:model.NP
@@ -182,9 +180,6 @@ for it=1:model.MaxIt
               chromosome(global_index).best.sol =chromosome(global_index).sol;
            end
  
-    end
-    if it==50
-       a=1; 
     end
     best(it+1) = p_global.cost;
     disp(['it: ',num2str(it),'   best value:',num2str(best(it))]);

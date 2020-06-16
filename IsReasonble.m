@@ -13,8 +13,8 @@ sum_beta =0;
           chromosome.pos(i,3) <model.Zmin || chromosome.pos(i,3) > model.Zmax
           AttackAlpha=0;
           AttackBeta =0;
-          flag_r =0;
-         
+          flag_r =2;
+          
       
           return
       end

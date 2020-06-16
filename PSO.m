@@ -69,6 +69,9 @@ for it=1:model.MaxIt
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
            %检验坐标是否合理
            [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
+           if flag==2
+           next_chromosome(i) =chromosome(i);
+           end
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
     end

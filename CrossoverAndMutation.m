@@ -32,7 +32,7 @@ function [ sons ] = CrossoverAndMutation( parents,model )
          %x1(t+1) = a*x1(t)+(1-a)x2(t)
          %x2(t+1) = a*x2(t)+(1-a)x1(t)
           %各个基因分别交叉
-           cross_prob = 0.95;
+           cross_prob = 0.8;
            sons(1).alpha =  cross_prob*gene_alpha(:,1)+(1-cross_prob)*gene_alpha(:,2);
            sons(2).alpha =  cross_prob*gene_alpha(:,2)+(1-cross_prob)*gene_alpha(:,1);
            sons(1).beta =  cross_prob*gene_beta(:,1)+(1-cross_prob)*gene_beta(:,2);

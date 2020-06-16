@@ -1,15 +1,23 @@
 clc;
 clear;
-close all;
+
 tic;
-model =CreateModel();
-plotmap(model);
-startp =[model.sx,model.sy,model.sz];
-endp=[model.ex,model.ey,model.ez];
+
 % 
-for i=1:2
+for i=6:7
+ close all;
+ model =CreateModel();
+ plotmap(model);
+ startp =[model.sx,model.sy,model.sz];
+ endp=[model.ex,model.ey,model.ez];
  model.cycle=i;
+ global Scene;
+ global fit_cmp;
  fit_array(i,:)=Algrithm_Choose(startp,endp,model);
+ name1 =['g:/images/route',num2str(i)];
+ name2 =['g:/images/fit',num2str(i)];
+ savefig(Scene,name1);
+ savefig(fit_cmp,name2);
 end
 m_x=[model.sx,model.mission_x,model.ex];
 m_y=[model.sy,model.mission_y,model.ey];

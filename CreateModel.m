@@ -14,13 +14,13 @@ alpha_max = 45;
 beta_min = -15;
 beta_max = 15;
 %GA种群数
-NP=50;
+NP=64;
 %GA最大迭代次数
-MaxIt=100;
+MaxIt=50;
 %每条染色体的维度
 dim =15;
 %num个个体初始化方式
-num=NP*0.1;
+num=NP*0.2;
 %交叉概率
 cross_prob =0.5;
 %变异概率
@@ -108,9 +108,9 @@ model.vrange =vrange;
 model.vel = vel;
 model.UAV=UAV;
 %pso
-c1=1.5;
-c2=1.5;
-w=1;
+c1=1;
+c2=1;
+w=0.8;
 model.w=w;
 model.c1=c1;
 model.c2=c2;

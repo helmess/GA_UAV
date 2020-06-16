@@ -94,10 +94,10 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
   
     %w4 =20;
     %计算距离代价
-     w1 =0.1;
+     w1 =0.05;
      w2=0.3;
      w3=0.1;
-     w4=0.5;
+     w4=5;
      %markov evaluatea
      %获取所有维度的坐标
      r_xx=[];r_yy=[];r_zz=[];
@@ -115,7 +115,7 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
    %[stateProbabilityProcess, expectedCostProcess]=MarkovEvaluate(Allpos,model);
    %sol.MarkovState = stateProbabilityProcess;
    %sol.MarkovCost = expectedCostProcess;
-    %sol.costs=[w1*sol.Length,w3*high,w4*150*mean(expectedCostProcess)];
+    sol.costs=[w1*sol.Length,w3*high,w2*Length*violation];
     cost= w1*sol.Length+w3*high+w2*Length*violation;
      
    

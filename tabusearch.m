@@ -57,16 +57,20 @@ end
 
 
 function alpha_neighbor = getneighborhood(x,model)
-    step=2;
-    neighborrange=10;
+   
+    
+    neighborrange=15;
     di =model.di;
     if di==1
+    step=3;
     x_min =model.alpha_min;
     x_max = model.alpha_max;
     else
+    step=0.1;
     x_min =model.beta_min;
     x_max = model.beta_max;    
     end
+ 
     x=reshape(x,1,model.dim);
     for i=1:neighborrange
     x = x + rand(1,model.dim)*step*2 -step;

@@ -7,7 +7,7 @@ function [ alpha,beta,T ] = Mutation( chromosome,model )
     %k是变异常数(0,1)，r是随机数假设是[0,1]
     if model.mutation_prob>rand
     r = randi(10,1,1);
-    k = 0.1;
+    k = 0.5;
     if mod(r,2) ==1
     alpha = chromosome.alpha - k*(chromosome.alpha - model.alpha_min)*r/10;
     beta =  chromosome.beta - k*(chromosome.beta - model.beta_min)*r/10;

@@ -10,11 +10,11 @@ global Scene;
     axis(scale);
     hold on;
     %画地形
-width=0:1000:model.Xmax;%x
-depth=0:1000:model.Ymax;%y
-height=abs(peaks(7)*120)+300;
-    wi=0:100:6000;
-    di=0:100:6000;
+width=0:5:model.Xmax;%x
+depth=0:5:model.Ymax;%y
+height=abs(peaks(7)*0.1)+0.3;
+    wi=0:0.5:model.Xmax;
+    di=0:0.5:model.Ymax;
     di=di';
     %差值拟合  嗯嗯
     zcubic=interp2(width,depth,height,wi,di,'cubic');
@@ -34,17 +34,11 @@ for k=1:numel(model.xobs)
     z(z<0)=nan;
     r=model.robs(k);
     x0=model.xobs(k);    y0=model.yobs(k);    z0=model.zobs(k);
-    X=x*r+x0;    Y=y*r+y0;    Z=z*r+z0; 
+    X=x*r+x0;    Y=y*r+y0;    Z=z*r*0.1+z0; 
     surf(X,Y,Z,'EdgeColor','b','FaceColor','none');
     hold on;
 end
-%画任务
-    [x,y,z]=sphere(30);  
-    r=2;
-    x0=model.ex;    y0=model.ey;    z0=model.ez;
-    X=x*r+x0;    Y=y*r+y0;    Z=z*r+z0; 
-    surf(X,Y,Z,'EdgeColor','none','FaceColor',[0.929,0.694,0.125]);
-    hold on;
+
 
 % %画武器
 % for k=1:numel(model.weapon_x)

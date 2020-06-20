@@ -81,8 +81,6 @@ for it=1:model.MaxIt
 %     model.c2 = c_max - it*(c_max - c_min)/model.MaxIt;
 %     end
     %得到最大和平均适应度值
-    model.f_max =max(seeds_fitness);
-    model.f_avg =mean(seeds_fitness);
    %按照适应度对染色体排序
     sort_array =zeros(model.NP,2);
     for i=1:model.NP
@@ -101,7 +99,9 @@ for it=1:model.MaxIt
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
            %检验坐标是否合理
            [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
-        
+           if flag==2
+           next_chromosome(i) =chromosome(i);
+           end
            %计算适应度值
            [next_chromosome(i).cost,next_chromosome(i).sol] = FitnessFunction(next_chromosome(i),model);
            next_chromosome(i).pso=1;
@@ -112,7 +112,7 @@ for it=1:model.MaxIt
         %随机选择父母
         parents =repmat(my_chromosome,2,1);
         for p=1:2
-        array =ceil(rand(1,2)*model.NP/2);
+        array =ceil(rand(1,2)*(model.NP)/2);
         if next_chromosome(array(1)).cost < next_chromosome(array(2)).cost
             parents(p) = next_chromosome(array(1));
         else
@@ -164,6 +164,7 @@ for it=1:model.MaxIt
     
     
     if improve==1 
+    model.it =it;
     p_global =tabusearch(p_global,model);
     %更新最优染色体
     chromosome(global_index).cost =p_global.cost;

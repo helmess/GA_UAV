@@ -22,17 +22,13 @@ function [ sons ] = CrossoverAndMutation( parents,model )
      %随机选取父母任一适应度值
      f = parents(randi(2,1,1)).cost;
      %个体适应度大则大概率交叉，适应度小则小概率交叉
-     if f < model.f_avg && model.std_ga==0
-        model.cross_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.cross_prob;
-        model.mutation_prob = (model.f_max -f)/(model.f_max - model.f_avg)*model.mutation_prob;
-     end
      %浮点数交叉
       if model.cross_prob > rand
          %浮点数交叉用随机数a(0,1);
          %x1(t+1) = a*x1(t)+(1-a)x2(t)
          %x2(t+1) = a*x2(t)+(1-a)x1(t)
           %各个基因分别交叉
-           cross_prob = 0.8;
+           cross_prob = 0.6;
            sons(1).alpha =  cross_prob*gene_alpha(:,1)+(1-cross_prob)*gene_alpha(:,2);
            sons(2).alpha =  cross_prob*gene_alpha(:,2)+(1-cross_prob)*gene_alpha(:,1);
            sons(1).beta =  cross_prob*gene_beta(:,1)+(1-cross_prob)*gene_beta(:,2);
@@ -58,11 +54,6 @@ function [ sons ] = CrossoverAndMutation( parents,model )
     end
     %如果不是所有的子代都符合约束则直接返回父母(为了避免程序卡主),返回0
     
-    for i=1:2
-       if sons(i).IsFeasible~=1 
-           sons(i) = parents(i);
-       end      
-    end
     sons(1).T=reshape(sons(1).T,1,model.dim);
     sons(2).T =reshape(sons(1).T,1,model.dim);
 end

@@ -68,10 +68,10 @@ model.globel =globel;
 % PlotSolution(std_globel_ga.sol,model);
 % % model.std_ga=1;
 % pause(0.01);
-% model.alg_choose=1;
-% global_pso =PSO(model);
-% PlotSolution(global_pso.sol,model);
-% pause(0.01);
+model.alg_choose=1;
+global_pso =PSO(model);
+PlotSolution(global_pso.sol,model);
+pause(0.01);
 
 % model.imporve_ga=1;
 % model.alg_choose=2;
@@ -88,28 +88,29 @@ model.improve_gapso=1;
 global_improve_gapso =GAPSO(model);
 PlotSolution(global_improve_gapso.sol,model);
 pause(0.01);
+
 % model.alg_choose=5;
 % model.improve_gapso=1;
 % global_improve_gatspso =GATSPSO(model);
 % PlotSolution(global_improve_gatspso.sol,model);
 global Scene;
-
+global p1;
 global p3;
 global p4;
 figure(Scene);
-legend([p3,p4],'GAPSO','IGAPSO');
+legend([p1,p3,p4],'PSO','GAPSO','IGAPSO');
 global fit_cmp;
 fit_cmp= figure;
-% plot(global_pso.best_plot);
-% hold on;
+plot(global_pso.best_plot);
+hold on;
 % plot(globel_ga.best_plot);
 % hold on;
 plot(global_gapso.best_plot);
 hold on;
 plot(global_improve_gapso.best_plot);
-legend('GAPSO','IGAPSO');
+legend('PSO','GAPSO','IGAPSO');
 %legend('GAPSO','DGAPSO');
-fit_array=[global_gapso.cost,global_improve_gapso.cost];
+fit_array=[global_pso.cost,global_gapso.cost,global_improve_gapso.cost];
 
 end
 

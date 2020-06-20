@@ -4,7 +4,7 @@ clear;
 tic;
 
 % 
-for i=6:7
+for i=13:13
  close all;
  model =CreateModel();
  plotmap(model);
@@ -14,8 +14,8 @@ for i=6:7
  global Scene;
  global fit_cmp;
  fit_array(i,:)=Algrithm_Choose(startp,endp,model);
- name1 =['g:/images/route',num2str(i)];
- name2 =['g:/images/fit',num2str(i)];
+ name1 =['g:/images/cmproute',num2str(i)];
+ name2 =['g:/images/cmpfit',num2str(i)];
  savefig(Scene,name1);
  savefig(fit_cmp,name2);
 end

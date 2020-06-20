@@ -19,9 +19,9 @@ function [ vel,alpha,beta,T ] = Update_vel_pos( next_chromosome,model )
         c1*rand(1,model.dim).*(next_chromosome.best.T - next_chromosome.T)+...
         c2*rand(1,model.dim).*(model.p_global.T - next_chromosome.T);
     %ËÙ¶ÈÔ¼Êø
-    vel_alpha_max =0.05*(model.alpha_max-model.alpha_min);
+    vel_alpha_max =0.2*(model.alpha_max-model.alpha_min);
     vel_alpha_min =-vel_alpha_max;
-    vel_beta_max =0.05*(model.beta_max-model.beta_min);
+    vel_beta_max =0.2*(model.beta_max-model.beta_min);
     vel_beta_min =-vel_beta_max;
     vel_T_max =0.05*(model.Tmax-model.Tmin);
     vel_T_min =-vel_T_max;

@@ -16,9 +16,9 @@ beta_max = 1;
 %GA种群数
 NP=30;
 %GA最大迭代次数
-MaxIt=80;
+MaxIt=50;
 %每条染色体的维度
-dim =12;
+dim =10;
 %num个个体初始化方式
 num=NP*0.1;
 %交叉概率

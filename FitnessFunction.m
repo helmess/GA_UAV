@@ -94,9 +94,9 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
   
     %w4 =20;
     %计算距离代价
-     w1 =0.1;
+     w1 =0.05;
      w2=0.8;
-     w3=0.1;
+     w3=0.15;
      w4=5;
      %markov evaluatea
      %获取所有维度的坐标

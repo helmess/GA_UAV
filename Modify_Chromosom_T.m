@@ -35,7 +35,7 @@ function [ T ] = Modify_Chromosom_T( chromosome,model )
     Length = sum(sqrt(dx.^2+dy.^2+dz.^2));
     deltaT = Length/model.vel/(model.dim+1);
     for i=1:model.dim
-       T(i)= (rand*(2*deltaT)-deltaT)*0.1 + deltaT;
+       T(i)=  deltaT;
     end
 
 end

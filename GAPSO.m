@@ -93,7 +93,7 @@ for it=1:model.MaxIt
     for i=1:model.NP/2
            
            next_chromosome(i) =chromosome(sort_array(i,1));
-      
+           
            %更新染色体的速度和位置
            [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );

@@ -40,7 +40,7 @@ for i =1:model.dim
       sum_beta = sum_beta + beta(i);
       sum_alpha = sum_alpha+ alpha(i);
 
-      T(i)= (rand*(2*deltaT)-deltaT)*0.1 + deltaT;
+      T(i)= deltaT;
  
 end
 %%num后染色体随机初始化
@@ -59,7 +59,7 @@ else
 %             beta(i) = rand*(model.beta_max);
 %         end
         
-        T(i)=(rand*(2*deltaT)-deltaT)*0.1+ deltaT;
+        T(i)= deltaT;
 %         last_alpha =  alpha(i);
 %         last_beta =  beta(i);
     end

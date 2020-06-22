@@ -1,10 +1,10 @@
-function [ fit_array ] = Algrithm_Choose( startp,endp,model )
+function [ fit_array,best_fit ] = Algrithm_Choose( startp,endp,model )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     %定义染色体
 %123
-model.startp=endp;
-model.endp=startp;
+model.startp=startp;
+model.endp=endp;
 
 my_chromosome.pos=[];
 my_chromosome.alpha=[];
@@ -72,12 +72,12 @@ model.alg_choose=1;
 global_pso =PSO(model);
 PlotSolution(global_pso.sol,model);
 pause(0.01);
-
-% model.imporve_ga=1;
-% model.alg_choose=2;
-% globel_ga=GA(model);
-% PlotSolution(globel_ga.sol,model);
-% pause(0.01);
+% 
+% % model.imporve_ga=1;
+% % model.alg_choose=2;
+% % globel_ga=GA(model);
+% % PlotSolution(globel_ga.sol,model);
+% % pause(0.01);
 model.alg_choose=3;
 model.improve_gapso=0;
 global_gapso=GAPSO(model);
@@ -111,6 +111,8 @@ plot(global_improve_gapso.best_plot);
 legend('PSO','GAPSO','IGAPSO');
 %legend('GAPSO','DGAPSO');
 fit_array=[global_pso.cost,global_gapso.cost,global_improve_gapso.cost];
-
+best_fit(1,:)=global_pso.best_plot;
+best_fit(2,:)=global_gapso.best_plot;
+best_fit(3,:)=global_improve_gapso.best_plot;
 end
 

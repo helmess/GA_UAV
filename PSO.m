@@ -67,6 +67,9 @@ for it=1:model.MaxIt
            model.p_global =p_global;
            [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
+           [next_chromosome(i).T] =Modify_Chromosom_T(next_chromosome(i),model);
+           %重新计算新的pos
+          [next_chromosome(i).pos] = Angel2Pos(next_chromosome(i),model);
            %检验坐标是否合理
            [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
            if flag==2

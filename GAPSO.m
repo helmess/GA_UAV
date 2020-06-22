@@ -95,8 +95,11 @@ for it=1:model.MaxIt
            next_chromosome(i) =chromosome(sort_array(i,1));
            
            %更新染色体的速度和位置
-           [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,next_chromosome(i).T]=Update_vel_pos( next_chromosome(i),model );
+           [next_chromosome(i).vel,next_chromosome(i).alpha,next_chromosome(i).beta,~]=Update_vel_pos( next_chromosome(i),model );
            [next_chromosome(i).pos]=Angel2Pos( next_chromosome(i),model );
+           [next_chromosome(i).T] =Modify_Chromosom_T(next_chromosome(i),model);
+           %重新计算新的pos
+          [next_chromosome(i).pos] = Angel2Pos(next_chromosome(i),model);
            %检验坐标是否合理
            [flag,next_chromosome(i).atkalpha,next_chromosome(i).atkbeta] = IsReasonble(next_chromosome(i),model);
            if flag==2
@@ -121,6 +124,10 @@ for it=1:model.MaxIt
         end
         %交叉变异操作
         [ sons] = CrossoverAndMutation( parents,model );
+        for k=1:2
+          [sons(k).T] =Modify_Chromosom_T(sons(k),model);
+          [sons(k).pos] = Angel2Pos(sons(k),model);
+        end
         %符合要求以后计算子代的适应度值
         [sons(1).cost,sons(1).sol] = FitnessFunction(sons(1),model);
         [sons(2).cost,sons(2).sol] = FitnessFunction(sons(2),model);

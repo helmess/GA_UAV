@@ -82,9 +82,9 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
     for p=1:point
         h=terrain(x_r(p),y_r(p));        
         if z_r(p)<=(h)  %限制飞行最低高度
-            high=high+5;          
+            high=high+10;          
         elseif z_r(p)>1   %限制飞行最高高度              
-            high=high+5;           
+            high=high+10;           
         else  
             high=high+abs(z_r(p) -0.4); %计算与理想高度差距和      
         end        
@@ -95,9 +95,9 @@ function [ cost,sol ] = FitnessFunction( chromosome,model )
     %w4 =20;
     %计算距离代价
      w1 =0.05;
-     w2=0.8;
+     w2=0.2;
      w3=0.15;
-     w4=5;
+     w4=2;
      %markov evaluatea
      %获取所有维度的坐标
      r_xx=[];r_yy=[];r_zz=[];

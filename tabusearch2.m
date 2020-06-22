@@ -38,6 +38,7 @@ function [ improve_global ] = tabusearch2( chromosome,model )
         %加到搜索列表
            bestcandidate =reshape(bestcandidate,1,model.dim);
            tabulist=[bestcandidate;tabulist];
+           x =bestcandidate;
            if di==1
            alpha =bestcandidate;
            else
@@ -63,24 +64,22 @@ function alpha_neighbor = getneighborhood(x,model)
     if di==1
     x_min =model.alpha_min;
     x_max = model.alpha_max;
-    else
-    x_min =model.beta_min;
-    x_max = model.beta_max;    
     end
     x=reshape(x,1,model.dim);
-    x0=x;
-    delta = linspace(-3,3,neighborrange);
-    for i=1:neighborrange
-        x=x0;
-        x(1) =x(1) +delta(i);
-        for k=2:model.dim
-            x(k)=x(k)+(1- k/model.dim)*delta(i);
-        end
-        x = max(x,x_min);
-        x = min(x,x_max);
-        alpha_neighbor(i,:) = x;
+    %随机选一个dim的领域
+    d = ceil(rand*(model.dim-1));
+    %确定这个dim的领域
+    neighbor =x(d)-8:1:x(d)+8;
+    neighbor=max(x_min,neighbor);
+    neighbor=min(x_max,neighbor);
+    k=numel(neighbor);
+    for i=1:k
+        %计算此alpha与领域的差
+        delta = x(d)-neighbor(i);
+        x(d)=neighbor(i);
+        x(d+1) = x(d+1)-delta;
+        alpha_neighbor(i,:)=x;
     end
-
     
 end
 

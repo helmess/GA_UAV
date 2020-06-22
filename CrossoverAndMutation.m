@@ -33,16 +33,16 @@ function [ sons ] = CrossoverAndMutation( parents,model )
            sons(2).alpha =  cross_prob*gene_alpha(:,2)+(1-cross_prob)*gene_alpha(:,1);
            sons(1).beta =  cross_prob*gene_beta(:,1)+(1-cross_prob)*gene_beta(:,2);
            sons(2).beta =  cross_prob*gene_beta(:,2)+(1-cross_prob)*gene_beta(:,1);
-           sons(1).T     =  cross_prob*gene_t(:,1)+(1-cross_prob)*gene_t(:,2);
-           sons(2).T     =  cross_prob*gene_t(:,2)+(1-cross_prob)*gene_t(:,1);
+%            sons(1).T     =  cross_prob*gene_t(:,1)+(1-cross_prob)*gene_t(:,2);
+%            sons(2).T     =  cross_prob*gene_t(:,2)+(1-cross_prob)*gene_t(:,1);
            %各个基因约束范围
            [sons(1).alpha,sons(1).beta,sons(1).T] = Constrain(sons(1).alpha,sons(1).beta,sons(1).T,model);
            [sons(2).alpha,sons(2).beta,sons(2).T] = Constrain(sons(2).alpha,sons(2).beta,sons(2).T,model); 
       end
      %%对新的基因进行变异操作
      for j=1:2
-     [sons(j).alpha,sons(j).beta,sons(j).T] = Mutation(sons(j),model);
-     [sons(j).alpha,sons(j).beta,sons(j).T] = Constrain(sons(j).alpha,sons(j).beta,sons(j).T,model);
+     [sons(j).alpha,sons(j).beta,~] = Mutation(sons(j),model);
+     [sons(j).alpha,sons(j).beta,~] = Constrain(sons(j).alpha,sons(j).beta,sons(j).T,model);
      end
      %判断两个子代的新基因是否合理,若不合理重新选择父母进行杂交
      
@@ -53,7 +53,12 @@ function [ sons ] = CrossoverAndMutation( parents,model )
 %     [sons(j).cost,sons(j).sol] = FitnessFunction(sons(j),model);
     end
     %如果不是所有的子代都符合约束则直接返回父母(为了避免程序卡主),返回0
-    
+    for i=1:2
+       if sons(i).IsFeasible==0
+            sons(i) =parents(i);
+       end
+       
+    end
     sons(1).T=reshape(sons(1).T,1,model.dim);
     sons(2).T =reshape(sons(1).T,1,model.dim);
 end

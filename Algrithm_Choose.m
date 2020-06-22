@@ -67,17 +67,17 @@ model.globel =globel;
 % std_globel_ga= Std_GA(model.startp,model.endp,model);
 % PlotSolution(std_globel_ga.sol,model);
 % % model.std_ga=1;
-% pause(0.01);
+% % pause(0.01);
 model.alg_choose=1;
 global_pso =PSO(model);
 PlotSolution(global_pso.sol,model);
 pause(0.01);
-% 
+
 % % model.imporve_ga=1;
 % % model.alg_choose=2;
 % % globel_ga=GA(model);
 % % PlotSolution(globel_ga.sol,model);
-% % pause(0.01);
+% % % pause(0.01);
 model.alg_choose=3;
 model.improve_gapso=0;
 global_gapso=GAPSO(model);
